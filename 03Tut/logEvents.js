@@ -11,10 +11,18 @@ const logEvents = async (message) => {
     console.log(logItem)
 
     try {
-
-    } catch (error) {}
+        if(!fs.existsSync(path.join(__dirname, 'logs'))) {
+            await fsPromises.mkdir(path.join(__dirname, 'logs'))
+        }
+        // testing
+        await fsPromises.appendFile(path.join(__dirname, 'logs', 'eventLog.txt',), logItem)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-console.log(format(new Date(), 'yyyy-MM-dd\tHH:mm:ss'))
+module.exports = logEvents
 
-console.log(uuid())
+// console.log(format(new Date(), 'yyyy-MM-dd\tHH:mm:ss'))
+
+// console.log(uuid())
